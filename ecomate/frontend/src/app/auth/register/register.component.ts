@@ -47,7 +47,7 @@ togglePassword() {
         this.error = '';
         this.redirecting = true;  // Show animation
 
-        setTimeout(() => this.router.navigate(['/login']), 2000);
+      setTimeout(() => window.location.href = '/dashboard', 1000);
       },
       error: (err) => {
         this.error = err.error.message || 'Registration failed';
