@@ -22,24 +22,22 @@ togglePassword() {
     this.showPassword = !this.showPassword;
   }
 
-  login() {
-    this.auth.login(this.email, this.password).subscribe({
-      next: (res) => {
-        this.error = '';
-        console.log('Login successful, token:', res.token); // Debug
-
-          // ✅ Save token and user in localStorage
-      localStorage.setItem('token', res.token);
+login() {
+  this.auth.login(this.email, this.password).subscribe({
+    next: (res) => {
+      this.error = '';
+      localStorage.setItem('token', res.token); // keep for backend
       localStorage.setItem('user', JSON.stringify(res.user));
-      
-        setTimeout(() => this.router.navigate(['/dashboard']), 1000);
-      },
-      error: (err) => {
-        console.error(err); // Debug
-        this.error = err.error.message || 'Login failed';
-      }
-    });
-  }
+      localStorage.setItem('auth_token', res.token); // ✅ important for header
+
+      setTimeout(() => window.location.href = '/dashboard', 1000);
+    },
+    error: (err) => {
+      this.error = err.error.message || 'Login failed';
+    }
+  });
+}
+
   
   goToRegister() {
     this.router.navigate(['/register']);
