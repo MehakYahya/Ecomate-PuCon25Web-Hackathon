@@ -1,36 +1,74 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #e8f5e9;
+}
+
 .auth-page {
+  position: relative;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to right, #e0f7fa, #f9f9f9);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
 }
 
+/* Background image with reduced opacity using ::before */
+.auth-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url('https://img.freepik.com/free-photo/green-leaves-white-background_53876-88575.jpg?semt=ais_hybrid&w=740');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.8; /* 👈 Adjust opacity here */
+  z-index: -1;
+}
+
+/* Glassmorphic Card - Lighter */
 .auth-container {
-  background-color: #fff;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   padding: 2.5rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   width: 100%;
   max-width: 400px;
   text-align: center;
+  color: #264653;
 }
 
 .auth-container h2 {
   margin-bottom: 1.5rem;
-  color: #2a9d8f;
+  color: #588157;
   font-size: 1.8rem;
 }
 
+/* Inputs */
 .auth-container input {
   width: 100%;
   padding: 0.75rem;
   margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
+  box-sizing: border-box;
   transition: border-color 0.3s ease;
+}
+
+.auth-container input::placeholder {
+  color: #888;
 }
 
 .auth-container input:focus {
@@ -38,10 +76,11 @@
   outline: none;
 }
 
+/* Button */
 .auth-container button {
-  width: 106%;
+  width: 100%;
   padding: 0.75rem;
-  background-color: #2a9d8f;
+  background-color: #588157;
   color: white;
   border: none;
   border-radius: 8px;
@@ -49,21 +88,24 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: 0.5rem;
 }
 
 .auth-container button:hover {
-  background-color: #1f5d7a;
+  background-color: #21867a;
 }
 
+/* Error message */
 .error {
   color: #e63946;
-  background-color: #fbeaea;
+  background-color: #fce4e4;
   padding: 0.8rem;
   border-radius: 6px;
   font-weight: 500;
   margin-top: 1rem;
 }
 
+/* Redirect link */
 .redirect {
   margin-top: 1.5rem;
   font-size: 0.95rem;
@@ -79,29 +121,22 @@
   text-decoration: underline;
 }
 
+/* Password wrapper */
 .password-wrapper {
   position: relative;
   width: 100%;
 }
 
 .password-wrapper input {
-  width: 106%;
-  padding: 0.75rem 2rem 0.75rem 0.75rem; /* top/right/bottom/left */
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-  box-sizing: border-box;
+  padding-right: 2.5rem;
 }
 
 .toggle-pass {
   position: absolute;
-  left: 98%;
-  top: 42%;
+  right: 10px;
+  top: 35%;
   transform: translateY(-50%);
   cursor: pointer;
-  user-select: none;
-  font-size: 1.3rem; /* small emoji size */
-  line-height: 1;
+  font-size: 1.3rem;
+  color: #444;
 }
