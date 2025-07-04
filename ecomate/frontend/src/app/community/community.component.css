@@ -1,32 +1,135 @@
-.community-container {
-  max-width: 600px;
-  margin: auto;
-  padding: 1em;
+/* 🌿 Community Page Background */
+.community-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 60px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('https://www.digicomply.com/hubfs/AI-Generated%20Media/Images/Carbon%20Footprint%20Reduction.jpeg') no-repeat center/cover;
+  overflow: hidden;
 }
 
-form input {
+/* 🌱 Glassmorphic Card */
+.community-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  color: #264653;
+}
+
+/* Headings */
+.community-container h2,
+.community-container h3 {
+  color: #588157;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Form Inputs */
+.community-container form input {
   display: block;
   width: 100%;
-  margin: 0.5em 0;
-  padding: 0.6em;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
 }
 
-button {
-  padding: 0.5em 1em;
-  margin-top: 0.5em;
+.community-container form input:focus {
+  border-color: #2a9d8f;
+  outline: none;
 }
 
+/* Buttons */
+.community-container button {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #588157;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.community-container button:hover {
+  background-color: #3d7a49;
+}
+
+/* Success & Error Messages */
 .success {
-  color: green;
+  color: #2a9d8f;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
 }
 
 .error {
-  color: red;
+  color: #e63946;
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
 }
 
-li {
-  background: #eef;
-  padding: 0.5em;
-  margin-bottom: 0.5em;
-  border-radius: 5px;
+/* List Styling */
+.community-container ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+.community-container li {
+  background: rgba(212, 234, 208, 0.9);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.community-container li strong {
+  color: #264653;
+}
+
+.community-container li span {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.community-scroll {
+  max-height: 300px; /* or 400px depending on layout */
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Optional: Style scrollbar for webkit browsers */
+.community-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.community-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.community-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
 }
