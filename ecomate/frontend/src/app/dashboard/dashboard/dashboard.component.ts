@@ -35,7 +35,6 @@ export class DashboardComponent implements OnInit {
       next: (res: any) => {
         this.msg = res.message || 'Goal updated successfully!';
         this.user.carbonGoal = this.goalInput;
-        
       },
       error: (err) => {
         console.error('Error updating goal:', err);
@@ -45,8 +44,17 @@ export class DashboardComponent implements OnInit {
   }
  getGoalProgress(): number {
   if (!this.user?.carbonGoal || this.user.carbonGoal === 0) return 0;
-  const progress = (-this.user.currentFootprint / this.user.carbonGoal) * 100;
-  return Math.min(Math.max(progress, 0), 100); // Clamp between 0 and 100
+
+  const goal = this.user.carbonGoal;
+  const footprint = this.user.currentFootprint || 0;
+
+  // Progress as usage of goal
+  if (footprint <= goal) {
+    return Math.round((footprint / goal) * 100);
+  }
+
+  // If user exceeded goal, cap at 100%
+  return 100;
 }
 
 }

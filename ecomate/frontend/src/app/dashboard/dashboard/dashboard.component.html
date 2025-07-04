@@ -8,6 +8,10 @@
       🌱 You’ve saved <strong>{{ -user.currentFootprint | number: '1.2-2' }}</strong> kg CO₂ through eco-friendly activities!
     </p>
   </ng-container>
+  <p *ngIf="user?.carbonGoal && user?.currentFootprint > user?.carbonGoal" style="color: red;">
+  ⚠️ You’ve exceeded your carbon goal. Try to reduce more!
+</p>
+
 
   <ng-template #footprintBlock>
     <p>Your Current Carbon Footprint: <strong>{{ user?.currentFootprint | number: '1.2-2' }}</strong> kg CO₂</p>
