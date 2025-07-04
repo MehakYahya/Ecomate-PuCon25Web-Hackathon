@@ -1,19 +1,61 @@
-.leaderboard-container {
-  max-width: 600px;
-  margin: auto;
-  padding: 2rem;
+/* Full page wrapper with background */
+.leaderboard-page {
+  min-height: 100vh;
+  background: url('https://www.digicomply.com/hubfs/AI-Generated%20Media/Images/Carbon%20Footprint%20Reduction.jpeg') no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.back-btn {
-  margin-bottom: 1rem;
-  background-color: #e2e8f0;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
+/* Card container */
+.leaderboard-container {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid #dbe9d5;
+  text-align: center;
 }
 
+/* Back button */
+.back-btn{
+
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #73ca70;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+  display: flex;
+}
+
+.back-btn:hover {
+  background-color: #3d7a49;
+}
+
+/* Title */
+.leaderboard-container h2 {
+  color: #2f855a;
+  margin-bottom: 1.2rem;
+  font-size: 1.8rem;
+}
+
+/* Error text */
+.error {
+  color: #e63946;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Leaderboard table */
 .leaderboard-table {
   width: 100%;
   border-collapse: collapse;
@@ -22,12 +64,44 @@
 
 .leaderboard-table th,
 .leaderboard-table td {
+  padding: 0.8rem 1rem;
   border: 1px solid #cbd5e0;
-  padding: 8px;
   text-align: left;
+  font-size: 15px;
 }
 
 .leaderboard-table th {
-  background-color: #38a169;
+  background-color: #588157;
   color: white;
+  text-align: center;
+}
+
+.leaderboard-table td {
+  background-color: #f9f9f9;
+}
+
+.leaderboard-table tr:nth-child(even) td {
+  background-color: #eefae6;
+}
+
+.leaderboard-table td:first-child {
+  font-weight: bold;
+  text-align: center;
+}
+
+.leaderboard-table td:nth-child(2) {
+  font-weight: 500;
+  color: #264653;
+}
+
+.leaderboard-table td:last-child {
+  color: #2f855a;
+  text-align: center;
+}
+
+/* No data fallback */
+.leaderboard-container > div:not(.error):not(.loading):not(.leaderboard-table) {
+  margin-top: 1.5rem;
+  color: #555;
+  font-style: italic;
 }
