@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit {
       next: (res: any) => {
         this.msg = res.message || 'Goal updated successfully!';
         this.user.carbonGoal = this.goalInput;
+        
       },
       error: (err) => {
         console.error('Error updating goal:', err);

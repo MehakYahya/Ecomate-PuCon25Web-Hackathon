@@ -1,49 +1,97 @@
+/* Page Wrapper with background */
+.dashboard-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+.dashboard-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-image: url('https://www.digicomply.com/hubfs/AI-Generated%20Media/Images/Carbon%20Footprint%20Reduction.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.75;
+  z-index: -1;
+}
+
+/* Glassmorphic Card */
 .dashboard {
+  width: 100%;
   max-width: 500px;
-  margin: auto;
-  padding: 1rem;
-  font-family: Arial, sans-serif;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px #ccc;
- margin-top: 20px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  color: #264653;
+  z-index: 1;
 }
 
+/* Headings */
 .dashboard h2 {
-  color: #2a9d8f;
+  color: #496f49;
+  margin-bottom: 1rem;
 }
 
+.dashboard h3 {
+  margin-top: 2rem;
+  color: #588157;
+}
+
+/* Inputs */
 input[type="number"] {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.75rem;
   margin: 1rem 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
   box-sizing: border-box;
 }
 
+/* Button */
 button {
-  background-color: #2ecc71;
+  background-color: #588157;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #27ae60;
+  background-color: #3d7a49;
 }
 
+/* Success Message */
 .success-msg {
   color: green;
+  font-weight: 500;
   margin-top: 10px;
 }
 
+/* Carbon progress bar */
 .progress-container {
   width: 100%;
   background-color: #ddd;
   height: 20px;
   border-radius: 10px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   overflow: hidden;
 }
 
@@ -51,4 +99,11 @@ button:hover {
   height: 100%;
   background-color: #3498db;
   transition: width 0.3s ease-in-out;
+}
+
+/* Savings Text */
+.savings {
+  color: #588157;
+  font-weight: 500;
+  margin-bottom: 1rem;
 }
