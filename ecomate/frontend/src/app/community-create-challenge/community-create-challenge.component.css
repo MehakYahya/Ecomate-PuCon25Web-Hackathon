@@ -1,38 +1,118 @@
-.create-challenge-container {
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
+/* Fullscreen page with background */
+.create-challenge-page {
+  position: relative;
+  min-height: 100vh;
+  background: url('https://www.digicomply.com/hubfs/AI-Generated%20Media/Images/Carbon%20Footprint%20Reduction.jpeg') no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Glass container */
+.create-challenge-container {
+  width: 100%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  color: #264653;
+}
+
+/* Heading */
+.create-challenge-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #588157;
+}
+
+/* Labels */
 .challenge-form label {
   display: block;
-  margin-top: 15px;
-  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: #333;
 }
 
+/* Inputs & Textarea */
 .challenge-form input,
 .challenge-form textarea {
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  resize: vertical;
 }
 
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #2e7d32;
+.challenge-form input:focus,
+.challenge-form textarea:focus {
+  border-color: #2a9d8f;
+  outline: none;
+}
+
+/* Submit button */
+.challenge-form button {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #588157;
   color: white;
   border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
-  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
+.challenge-form button:hover {
+  background-color: #3d7a49;
+}
+
+/* Back Button */
+.back-btn {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  background-color: #2a9d8f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #1f5d7a;
+}
+
+/* Feedback Messages */
 .success {
-  color: green;
-  margin-top: 10px;
+  color: #2a9d8f;
+  background: #e6fff4;
+  padding: 0.6rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-align: center;
 }
 
 .error {
-  color: red;
-  margin-top: 10px;
+  color: #e63946;
+  background: #fcebea;
+  padding: 0.6rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-align: center;
 }
