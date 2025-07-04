@@ -7,7 +7,7 @@ body {
 
 /* Header Container */
 header {
-  background-color: #264653;
+  background-color: #588157;
   padding: 0.8rem 1.5rem;
   color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -46,5 +46,5 @@ header {
 /* Hover and Active States */
 .nav-links a:hover,
 .nav-links a.active {
-  background-color: #2a9d8f;
+  background-color: #a3b18a;
 }

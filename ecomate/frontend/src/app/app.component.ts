@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet,RouterLink,RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
   isLoggedIn = false;
+constructor(private router: Router) {}
 
   ngOnInit() {
     this.checkLoginStatus();
@@ -26,6 +28,6 @@ export class AppComponent {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('user');
     this.isLoggedIn = false;
-    window.location.href = '/login'; // reload to force route update
+this.router.navigate(['/login']);
   }
 }
