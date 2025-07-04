@@ -55,8 +55,14 @@ export const routes: Routes = [
   },
 
   // Redirect root to register
-  { path: '', redirectTo: 'register', pathMatch: 'full' },
+{
+  path: '',
+  loadComponent: () =>
+    import('./redirect/redirect.component').then(m => m.RedirectComponent)
+},
+{
+  path: '**',
+  loadComponent: () => import('./redirect/redirect.component').then(m => m.RedirectComponent)
+}
 
-  // Wildcard last!
-  { path: '**', redirectTo: 'register' }
 ];
