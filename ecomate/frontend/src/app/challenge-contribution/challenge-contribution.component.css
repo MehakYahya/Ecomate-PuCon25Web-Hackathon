@@ -1,37 +1,55 @@
-.contribution-container {
-  max-width: 500px;
-  margin: 30px auto;
-  background-color: #f9fefc;
-  padding: 20px;
-  border: 2px solid #a5d6a7;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 128, 0, 0.1);
+.contribution-page {
+  min-height: 100vh;
+  padding: 60px 20px;
+  background: url('https://www.digicomply.com/hubfs/AI-Generated%20Media/Images/Carbon%20Footprint%20Reduction.jpeg') no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-h2 {
+.contribution-container {
+  width: 100%;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #cce3cc;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.contribution-container h2 {
   text-align: center;
   color: #2e7d32;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
+  font-weight: 600;
   color: #33691e;
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
 textarea,
 input[type='number'] {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #c8e6c9;
-  border-radius: 5px;
-  font-size: 14px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #a5d6a7;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  box-sizing: border-box;
 }
 
 textarea:focus,
@@ -43,17 +61,22 @@ input:focus {
 .form-actions {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
+/* Submit */
 .submit-btn {
   background-color: #388e3c;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 0.75rem 1.5rem;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  flex: 1;
+  min-width: 160px;
 }
 
 .submit-btn:disabled {
@@ -61,11 +84,24 @@ input:focus {
   cursor: not-allowed;
 }
 
+
 .cancel-btn {
-  background: none;
-  color: #555;
+  background-color: #62ab66;
+  color: #333;
+  text-decoration: underline;
   border: none;
   cursor: pointer;
-  font-size: 14px;
-  text-decoration: underline;
+  flex: 1;
+  min-width: 160px;
+  font-weight: bold;
+    border-radius: 6px;
+
+}
+
+
+@media (max-width: 600px) {
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
