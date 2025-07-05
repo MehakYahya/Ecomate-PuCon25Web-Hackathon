@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +16,7 @@ export class DashboardComponent implements OnInit {
   goalInput: number = 0;
   msg: string = '';
 
-  constructor(private auth: AuthService) {}
+constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.auth.getUserProfile().subscribe({
@@ -26,6 +27,7 @@ export class DashboardComponent implements OnInit {
       error: (err) => {
         console.error('Error fetching user:', err);
         this.msg = 'Failed to load user data';
+           this.router.navigate(['/register']);
       }
     });
   }
