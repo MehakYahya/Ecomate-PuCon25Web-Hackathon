@@ -8,6 +8,7 @@
     <div *ngIf="communityData && !loading && !error">
       <h2>{{ communityData.name }}</h2>
       <p>{{ communityData.description }}</p>
+<app-community-prediction [communityId]="communityData._id"></app-community-prediction>
 
       <h3>Members ({{ communityData.members?.length || 0 }})</h3>
 

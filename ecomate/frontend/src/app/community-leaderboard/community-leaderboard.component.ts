@@ -26,7 +26,7 @@ export class CommunityLeaderboardComponent implements OnInit {
   fetchLeaderboard() {
     this.loading = true;
     this.error = null;
-    const token = localStorage.getItem('token');
+  const token = localStorage.getItem('auth_token');
 
     this.http
       .get<any[]>(`http://localhost:5000/api/communities/${this.communityId}/leaderboard`, {

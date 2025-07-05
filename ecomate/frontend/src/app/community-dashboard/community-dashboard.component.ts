@@ -4,12 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CommunityPredictionComponent } from '../components/community-prediction/community-prediction.component';
 
 @Component({
   selector: 'app-community-dashboard',
   templateUrl: './community-dashboard.component.html',
   styleUrls: ['./community-dashboard.component.css'],
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule,
+    CommunityPredictionComponent],
   standalone: true,
 })
 export class CommunityDashboardComponent implements OnInit {
@@ -36,7 +38,7 @@ export class CommunityDashboardComponent implements OnInit {
     this.loading = true;
     this.error = null;
 
-    const token = localStorage.getItem('token');
+  const token = localStorage.getItem('auth_token');
 
     this.http
       .get(`http://localhost:5000/api/communities/${this.communityId}`, {
@@ -77,7 +79,7 @@ export class CommunityDashboardComponent implements OnInit {
   }
 
   joinCommunity() {
-    const token = localStorage.getItem('token');
+  const token = localStorage.getItem('auth_token');
     this.http
       .post(
         `http://localhost:5000/api/communities/${this.communityId}/join`,
@@ -94,7 +96,7 @@ export class CommunityDashboardComponent implements OnInit {
   }
 
   leaveCommunity() {
-    const token = localStorage.getItem('token');
+  const token = localStorage.getItem('auth_token');
     this.http
       .post(
         `http://localhost:5000/api/communities/${this.communityId}/leave`,
