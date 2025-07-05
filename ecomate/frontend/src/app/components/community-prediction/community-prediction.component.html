@@ -1,0 +1,15 @@
+<div *ngIf="loading">⏳ Loading prediction...</div>
+<div *ngIf="error">{{ error }}</div>
+
+<div *ngIf="prediction">
+  <h3>📊 Impact Forecast</h3>
+  <p><strong>Members:</strong> {{ prediction.membersCount }}</p>
+  <p><strong>Contributed Members:</strong> {{ prediction.contributorsCount }}</p>
+
+  <p><strong>Total Actions:</strong> {{ prediction.totalActions }}</p>
+  <p><strong>Avg Actions/Member:</strong> {{ prediction.avgActionsPerMember.toFixed(2) }}</p>
+  <p><strong>Total Points:</strong> {{ prediction.totalPoints }}</p>
+
+  <p><strong>Predicted Reduction:</strong> {{ prediction.predictedReductionKgCO2 }} kg CO₂</p>
+  <p><strong>Goal:</strong> {{ prediction.goalKgCO2 }} kg in {{ prediction.goalPeriodMonths }} months</p>
+</div>
