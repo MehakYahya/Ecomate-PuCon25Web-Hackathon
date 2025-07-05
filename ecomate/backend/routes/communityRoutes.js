@@ -5,6 +5,10 @@ const mongoose = require('mongoose');
 const auth = require('../middleware/authMiddleware');
 const Community = require('../models/Community');
 const Challenge = require('../models/Challenge');
+
+const { predictImpact } = require('../controller/communityController');
+
+router.get('/:communityId/predict-impact', predictImpact);
 // Create a community
 router.post('/', auth, async (req, res) => {
   const { name, description } = req.body;
@@ -248,6 +252,8 @@ router.get('/:id/leaderboard', auth, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+
 
 
 module.exports = router;

@@ -11,10 +11,8 @@ const auth = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // ✅ Fix: Attach full decoded payload to req.user
-    req.user = { id: decoded.id ,
-            name: decoded.name,  // ✅ This line is critical
+       req.user = decoded; // decoded should contain user id etc.
 
-    };
 
     next();
   } catch (err) {

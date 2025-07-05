@@ -7,6 +7,51 @@ const auth = require('../middleware/authMiddleware');
 const generateToken = require('../utils/generateToken');
 const Activity = require('../models/Activity'); // Moved to top
 
+
+const admin = require('../firebaseAdmin');
+router.post('/google-login', async (req, res) => {
+  const { idToken } = req.body;
+
+  if (!idToken) {
+    return res.status(400).json({ message: 'ID token is required' });
+  }
+
+  try {
+    // Verify Firebase ID token
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const { uid, email, name } = decodedToken;
+
+    if (!email) {
+      return res.status(400).json({ message: 'Email not found in Firebase token' });
+    }
+
+    // Find existing user or create new one
+    let user = await User.findOne({ email });
+    if (!user) {
+      user = new User({ email, name: name || 'Google User', firebaseUid: uid });
+      await user.save();
+    }
+
+    // Create JWT token for your app
+    const token = jwt.sign(
+      { id: user._id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    res.json({
+      token,
+      user: { id: user._id, email: user.email, name: user.name }
+    });
+  } catch (error) {
+    console.error('Error verifying Firebase ID token:', error);
+    res.status(401).json({ message: 'Invalid ID token' });
+  }
+});
+
+
+
+
 // Register
 router.post('/register', async (req, res) => {
   let { name, email, password } = req.body;
