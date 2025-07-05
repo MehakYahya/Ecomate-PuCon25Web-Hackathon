@@ -43,7 +43,7 @@ export class CommunityChallengesComponent implements OnInit {
 
   fetchChallenges() {
   this.loading = true;
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('auth_token');
 
   this.http
     .get<any[]>(`http://localhost:5000/api/communities/${this.communityId}/challenges`, {
@@ -91,7 +91,7 @@ hasJoined(challenge: any): boolean {
 
 
   joinChallenge(challengeId: string) {
-    const token = localStorage.getItem('token');
+  const token = localStorage.getItem('auth_token');
 
     this.http
       .post(

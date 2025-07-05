@@ -29,7 +29,7 @@ export class ChallengeContributionComponent implements OnInit {
   }
 
   submitContribution() {
-    const token = localStorage.getItem('token');
+  const token = localStorage.getItem('auth_token');
     this.http.post(
       `http://localhost:5000/api/communities/${this.communityId}/challenges/${this.challengeId}/contribute`,
       {
