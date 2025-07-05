@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { GoogleAuthService } from '../../services/google.auth.service';
+import { HttpClient } from '@angular/common/http'; // <-- Import HttpClient
 
 @Component({
   selector: 'app-register',
@@ -20,7 +22,8 @@ export class RegisterComponent {
   error = '';
   success = '';
 redirecting = false;
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router, private googleAuth: GoogleAuthService,
+      private http: HttpClient ) {}
 showPassword = false;
 showConfirmPassword = false;
 passwordMismatch = false;
@@ -59,4 +62,31 @@ togglePassword() {
     goToLogin() {
     this.router.navigate(['/login']);
   }
+   googleLogin() {
+    this.googleAuth.signIn()
+      .then(async (result) => {
+        const user = result.user;
+        // Get Firebase ID token for this user
+        const idToken = await user.getIdToken();
+
+        // Send Firebase ID token to your backend to verify and get your own JWT
+        this.http.post<{ token: string; user: any }>(
+           'http://localhost:5000/api/users/google-login',
+          { idToken }
+        ).subscribe({
+          next: (res: any) => {
+            localStorage.setItem('auth_token', res.token);
+            localStorage.setItem('user', JSON.stringify(res.user));
+            window.location.href = '/dashboard';
+          },
+          error: (err: any) => {
+            this.error = err.error?.message || 'Google login failed';
+          }
+        });
+      })
+      .catch((error: any) => {
+        this.error = error.message;
+      });
+  }
+
 } 

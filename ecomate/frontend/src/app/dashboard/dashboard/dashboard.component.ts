@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -16,7 +15,7 @@ export class DashboardComponent implements OnInit {
   goalInput: number = 0;
   msg: string = '';
 
-constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService,private router: Router) {}
 
   ngOnInit() {
     this.auth.getUserProfile().subscribe({
@@ -27,7 +26,7 @@ constructor(private auth: AuthService, private router: Router) {}
       error: (err) => {
         console.error('Error fetching user:', err);
         this.msg = 'Failed to load user data';
-           this.router.navigate(['/register']);
+    this.router.navigate(['/login']);
       }
     });
   }

@@ -140,3 +140,37 @@ html, body {
   font-size: 1.3rem;
   color: #444;
 }
+
+.checkbox-label {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.redirect a {
+  color: #2a9d8f;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.google-btn {
+  background: transparent !important; 
+  border: none !important;           
+  color: #444 !important;
+  padding: 0 !important;
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: none !important;
+}
+
+.google-btn img {
+  width: 22px;
+  height: 22px;
+}

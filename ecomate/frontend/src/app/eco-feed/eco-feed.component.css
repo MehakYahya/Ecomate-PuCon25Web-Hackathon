@@ -118,8 +118,8 @@ input:focus {
 
 /* Post Styles */
 .post {
-  background: #ffffff;
-  border-radius: 12px;
+ background: rgba(212, 234, 208, 0.9);  
+ border-radius: 12px;
   margin-bottom: 25px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
