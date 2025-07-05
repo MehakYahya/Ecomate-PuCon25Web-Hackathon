@@ -54,6 +54,7 @@ export const routes: Routes = [
     loadComponent: () => import('./community/community.component').then(m => m.CommunityComponent)
   },
 
+
   // Redirect root to register
 {
   path: '',
