@@ -77,7 +77,7 @@ togglePassword() {
           next: (res: any) => {
             localStorage.setItem('auth_token', res.token);
             localStorage.setItem('user', JSON.stringify(res.user));
-            window.location.href = '/dashboard';
+            window.location.href = '/login';
           },
           error: (err: any) => {
             this.error = err.error?.message || 'Google login failed';
