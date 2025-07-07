@@ -59,5 +59,31 @@ EcoMate should provide a comprehensive suite of functionalities enabling users t
 6. (Bonus Feature) Predictive Impact Analysis for Communities: 
    - Develop a feature that uses Al to analyze current community engagement, participation in challenges, and stated goals to provide a forecast of the community's potential collective carbon reduction over a defined period.
 
+  ## 📦 Setup Instructions
 
+# Clone the repo
+git clone https://github.com/MehakYahya/Ecomate-PuCon25Web-Hackathon.git
+# Backend Setup
+cd Ecomate-PuCon25Web-Hackathon/ecomate/backend
+npm install
+node server.js
 
+# Frontend Setup
+cd Ecomate-PuCon25Web-Hackathon/ecomate/frontend
+npm install
+ng serve
+
+## 🚀 Demo & Screenshots
+
+![register](https://github.com/user-attachments/assets/5b9144d5-2029-454a-b55e-71ca56563755)
+![dashboard](https://github.com/user-attachments/assets/3b2c6695-810b-4f54-b80d-c4e0bbea0f06)
+![log activity](https://github.com/user-attachments/assets/b4ccb056-1990-4699-bd43-c16676cd9bd9)
+![activity history](https://github.com/user-attachments/assets/d694a7ef-db30-49f8-94bd-b52f2ff14ca5)
+![Community](https://github.com/user-attachments/assets/93189dc2-a207-4ea1-8f40-bb7b2c69a4d1)
+![community forecast](https://github.com/user-attachments/assets/e9d7a267-5e9e-4588-af67-c57e2a9000bc)
+![community challenges](https://github.com/user-attachments/assets/ef27e725-1e4c-45cf-a5b8-4a4f6c547df7)
+![create new challenge](https://github.com/user-attachments/assets/ca5f09c5-3dcf-4f73-a8f5-977a1b565fc4)
+![join challnege](https://github.com/user-attachments/assets/bc1ad853-fed6-4bcb-8d8d-9199b8ebaf54)
+![chllnege contribbuted](https://github.com/user-attachments/assets/0c9ee5bf-4d0f-4a8d-b12a-f94230c891c0)
+![community leaderboard](https://github.com/user-attachments/assets/a8da0f97-883b-49ab-9226-040d77b58639)
+![eco feed](https://github.com/user-attachments/assets/d51ee0c4-51f1-4c51-8fa8-690dfce38f56)
