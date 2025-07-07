@@ -12,4 +12,9 @@
 
   <p><strong>Predicted Reduction:</strong> {{ prediction.predictedReductionKgCO2 }} kg CO₂</p>
   <p><strong>Goal:</strong> {{ prediction.goalKgCO2 }} kg in {{ prediction.goalPeriodMonths }} months</p>
+
+  <!-- ✅ NEW: Show Progress Percentage -->
+  <p><strong>Progress:</strong> 
+    {{ getProgressPercentage() }}%
+  </p>
 </div>

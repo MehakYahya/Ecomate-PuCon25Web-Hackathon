@@ -19,14 +19,16 @@ export class LogActivityComponent {
 
   constructor(private auth: AuthService) {}
 
-  // Emission factors per activity
   calculateEmission() {
     const factors: Record<string, number> = {
-      car: 0.2,      // kg CO₂ per km
+      car: 0.2,             // per km
       bus: 0.1,
-      bike: -0.05,   // saves carbon
+      bike: -0.05,
       walk: -0.05,
-      tree: -21      // saves carbon
+      tree: -21,            // per tree
+      electricity: 0.4,     // per kWh
+      meatless: -2.5,       // per meal
+      recycling: -1         // per kg
     };
 
     if (!(this.activityType in factors)) {
@@ -38,7 +40,6 @@ export class LogActivityComponent {
   }
 
   logActivity() {
-    // Basic validation
     if (!this.activityType || this.amount == null || this.amount <= 0) {
       this.error = 'Please select an activity type and enter a valid amount.';
       this.message = '';
@@ -55,10 +56,11 @@ export class LogActivityComponent {
 
     this.auth.logActivity(activity).subscribe({
       next: () => {
-        this.message = 'Activity logged successfully!';
+        this.message = '✅ Activity logged successfully!';
         this.error = '';
         this.amount = null;
         this.activityType = '';
+        this.emission = 0;
       },
       error: err => {
         this.error = err.error?.message || 'Error logging activity';

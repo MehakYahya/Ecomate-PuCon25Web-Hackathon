@@ -19,10 +19,11 @@ export class CommunityPredictionComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
+      console.log('🟢 Community ID:', this.communityId); // <-- Add this
+
     this.fetchPrediction();
   }
-
-  fetchPrediction() {
+ fetchPrediction() {
     this.loading = true;
     this.http.get<any>(`http://localhost:5000/api/communities/${this.communityId}/predict-impact`)
       .subscribe({
@@ -36,4 +37,10 @@ export class CommunityPredictionComponent implements OnInit {
         }
       });
   }
+  getProgressPercentage(): string {
+  if (!this.prediction || this.prediction.goalKgCO2 === 0) return '0.0';
+  const percent = (this.prediction.predictedReductionKgCO2 / this.prediction.goalKgCO2) * 100;
+  return percent.toFixed(1);
+}
+
 }

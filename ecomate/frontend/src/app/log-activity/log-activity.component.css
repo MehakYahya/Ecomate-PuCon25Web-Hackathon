@@ -111,3 +111,10 @@
 .activity-form p[style*="red"] {
   color: #e63946 !important;
 }
+
+.info {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: #555;
+}

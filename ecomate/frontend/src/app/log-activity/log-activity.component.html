@@ -1,28 +1,75 @@
 <div class="activity-page">
+  <div class="activity-form">
+    <h2>Log Sustainable Activity</h2>
 
-<div class="activity-form">
-  <h2>Log Activity</h2>
+    <form (ngSubmit)="logActivity()">
 
-  <form (ngSubmit)="logActivity()">
-    <label for="type">Activity Type:</label>
-    <select id="type" [(ngModel)]="activityType" name="activityType" required>
-      <option value="">-- Select --</option>
-      <option value="car">Car (driving)</option>
-      <option value="bus">Bus</option>
-      <option value="bike">Bike</option>
-      <option value="walk">Walk</option>
-      <option value="tree">Tree Planting</option>
-    </select>
+      <!-- Activity Type -->
+      <div class="form-group">
+        <label for="type">Select Activity Type</label>
+        <select id="type" [(ngModel)]="activityType" name="activityType" required>
+          <option value="">-- Select --</option>
+          <option value="car">Car (driving)</option>
+          <option value="bus">Bus</option>
+          <option value="bike">Bike</option>
+          <option value="walk">Walk</option>
+          <option value="tree">Tree Planting</option>
+          <option value="electricity">Electricity Usage</option>
+          <option value="meatless">Meatless Meal</option>
+          <option value="recycling">Recycling</option>
+        </select>
+      </div>
 
-    <label for="amount">
-      Amount (in {{ activityType === 'tree' ? 'trees' : 'km' }}):
-    </label>
-    <input type="number" id="amount" [(ngModel)]="amount" name="amount" required />
+      <div *ngIf="activityType === 'car' || activityType === 'bus'" class="form-group">
+        <label>Distance traveled (km)</label>
+        <input type="number" [(ngModel)]="amount" name="amount" (ngModelChange)="calculateEmission()" required />
+        <small class="info">Use odometer or Google Maps to estimate travel.</small>
+      </div>
 
-    <button type="submit">Log Activity</button>
-  </form>
+      <div *ngIf="activityType === 'bike' || activityType === 'walk'" class="form-group">
+        <label>Distance covered (km)</label>
+        <input type="number" [(ngModel)]="amount" name="amount" (ngModelChange)="calculateEmission()" required />
+        <small class="info">You can use a fitness app or step counter.</small>
+      </div>
 
-  <p *ngIf="message" style="color: green;">{{ message }}</p>
-  <p *ngIf="error" style="color: red;">{{ error }}</p>
-</div>
+      <div *ngIf="activityType === 'tree'" class="form-group">
+        <label>Number of trees planted</label>
+        <input type="number" [(ngModel)]="amount" name="amount" (ngModelChange)="calculateEmission()" required />
+        <small class="info">Each tree absorbs ~21 kg CO₂ per year.</small>
+      </div>
+
+      <div *ngIf="activityType === 'electricity'" class="form-group">
+        <label>Electricity used (kWh)</label>
+        <input type="number" [(ngModel)]="amount" name="amount" (ngModelChange)="calculateEmission()" required />
+        <small class="info">Check “units” on your bill. Avg Pakistani home uses ~250-300 kWh/month.</small>
+      </div>
+
+      <div *ngIf="activityType === 'meatless'" class="form-group">
+        <label>Number of meatless meals</label>
+        <input type="number" [(ngModel)]="amount" name="amount" (ngModelChange)="calculateEmission()" required />
+        <small class="info">Each vegetarian/vegan meal saves ~2.5 kg CO₂.</small>
+      </div>
+
+      <div *ngIf="activityType === 'recycling'" class="form-group">
+        <label>Amount recycled (kg)</label>
+        <input type="number" [(ngModel)]="amount" name="amount" (ngModelChange)="calculateEmission()" required />
+        <small class="info">Roughly: 1 bottle ≈ 0.03kg, 1 newspaper ≈ 0.1kg, 1 glass jar ≈ 0.5kg.</small>
+      </div>
+
+      <!-- Emission Preview -->
+      <div *ngIf="amount && emission !== 0" class="form-group">
+        <p>
+          🌱 Estimated CO₂ Impact:
+          <strong [style.color]="emission < 0 ? 'green' : '#588157'">
+            {{ emission.toFixed(2) }} kg CO₂
+          </strong>
+        </p>
+      </div>
+      <div class="form-group">
+        <button type="submit">Log Activity</button>
+      </div>
+      <p *ngIf="message" class="success">{{ message }}</p>
+      <p *ngIf="error" class="error">{{ error }}</p>
+    </form>
+  </div>
 </div>
