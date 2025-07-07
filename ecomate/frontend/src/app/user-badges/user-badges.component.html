@@ -1,0 +1,17 @@
+<div class="badge-container">
+  <h2>🏅 My Eco Badges</h2>
+
+  <div *ngIf="badges.length === 0 && !error">No badges earned yet.</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div class="badges-grid">
+    <div *ngFor="let badge of badges" class="badge-card" [ngClass]="badge.category.toLowerCase()">
+      <div class="badge-icon">{{ badge.icon || '🏅' }}</div>
+      <div class="badge-info">
+        <h4>{{ badge.name }}</h4>
+        <p>{{ badge.description }}</p>
+        <small>Earned on: {{ badge.awardedAt | date }}</small>
+      </div>
+    </div>
+  </div>
+</div>

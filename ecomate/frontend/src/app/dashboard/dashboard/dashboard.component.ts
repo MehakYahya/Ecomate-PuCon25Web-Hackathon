@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { UserBadgesComponent } from '../../user-badges/user-badges.component';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, UserBadgesComponent ]
 })
 export class DashboardComponent implements OnInit {
   user: any = {};
@@ -30,7 +31,18 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-
+resetProgress() {
+  this.auth.resetUserProgress().subscribe({
+    next: (res: any) => {
+      this.msg = res.message;
+      this.user.currentFootprint = 0;
+    },
+    error: (err) => {
+      console.error('Reset error:', err);
+      this.msg = 'Failed to reset progress';
+    }
+  });
+}
   updateGoal() {
     this.auth.updateCarbonGoal(this.goalInput).subscribe({
       next: (res: any) => {
@@ -43,19 +55,28 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
- getGoalProgress(): number {
+getGoalProgress(): number {
   if (!this.user?.carbonGoal || this.user.carbonGoal === 0) return 0;
 
   const goal = this.user.carbonGoal;
   const footprint = this.user.currentFootprint || 0;
 
-  // Progress as usage of goal
-  if (footprint <= goal) {
-    return Math.round((footprint / goal) * 100);
+  // If user is saving carbon (negative footprint), calculate as progress
+  if (footprint < 0) {
+    const saved = Math.abs(footprint);
+    const progress = Math.round((saved / goal) * 100);
+    return Math.min(progress, 100); // Cap at 100%
   }
 
-  // If user exceeded goal, cap at 100%
-  return 100;
+  // If user has positive footprint (used emissions)
+  const progress = Math.round((footprint / goal) * 100);
+  return Math.min(progress, 100);
+}
+
+showBadges = false;
+
+toggleBadges() {
+  this.showBadges = !this.showBadges;
 }
 
 }

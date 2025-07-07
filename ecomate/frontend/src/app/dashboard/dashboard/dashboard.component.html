@@ -1,40 +1,49 @@
 <div class="dashboard-page">
+  <div class="dashboard">
+    <h2>Welcome, {{ user?.name }}</h2>
 
-<div class="dashboard">
-  <h2>Welcome, {{ user?.name }}</h2>
+<ng-container *ngIf="user">
+  <p *ngIf="user.currentFootprint < 0" class="savings">
+    🌱 You’ve saved <strong>{{ -user.currentFootprint | number: '1.2-2' }}</strong> kg CO₂ through eco-friendly activities!
+  </p>
 
-  <ng-container *ngIf="user?.currentFootprint < 0; else footprintBlock">
-    <p class="savings">
-      🌱 You’ve saved <strong>{{ -user.currentFootprint | number: '1.2-2' }}</strong> kg CO₂ through eco-friendly activities!
+  <p *ngIf="user.currentFootprint >= 0" class="footprint-line">
+    Your Current Carbon Footprint:
+    <strong>{{ user.currentFootprint | number: '1.2-2' }}</strong> kg CO₂
+    <button (click)="resetProgress()" class="reset-btn-inline" title="Reset footprint">Reset 🔁</button>
+  </p>
+</ng-container>
+    <!-- Over goal warning -->
+    <p *ngIf="user?.carbonGoal && user?.currentFootprint > user?.carbonGoal" style="color: red;">
+      ⚠️ You’ve exceeded your carbon goal. Try to reduce more!
     </p>
-  </ng-container>
-  <p *ngIf="user?.carbonGoal && user?.currentFootprint > user?.carbonGoal" style="color: red;">
-  ⚠️ You’ve exceeded your carbon goal. Try to reduce more!
-</p>
 
+    <p>Your Target Goal: <strong>{{ user?.carbonGoal || 0 }}</strong> kg CO₂</p>
 
-  <ng-template #footprintBlock>
-    <p>Your Current Carbon Footprint: <strong>{{ user?.currentFootprint | number: '1.2-2' }}</strong> kg CO₂</p>
-  </ng-template>
+    <div class="progress-container">
+      <div
+        class="progress-bar"
+        [style.width.%]="getGoalProgress()"
+        [style.background]="user?.currentFootprint < 0 ? 'green' : '#4caf50'">
+      </div>
+    </div>
 
-  <p>Your Target Goal: <strong>{{ user?.carbonGoal || 0 }}</strong> kg CO₂</p>
+    <p *ngIf="user?.carbonGoal">Progress: {{ getGoalProgress() | number: '1.0-0' }}%</p>
 
-  <div class="progress-container">
-    <div
-      class="progress-bar"
-      [style.width.%]="getGoalProgress()"
-      [style.background]="user?.currentFootprint < 0 ? 'green' : '#4caf50'">
+    <h3>Update Carbon Goal</h3>
+    <input type="number" [(ngModel)]="goalInput" placeholder="Set your goal" />
+    <button (click)="updateGoal()">Save Goal</button>
+
+    <p *ngIf="msg" style="color: green">{{ msg }}</p>
+
+    <div style="margin-top: 1.5rem;">
+      <button (click)="toggleBadges()">
+        {{ showBadges ? 'Hide Badges' : '🎖️ View My Badges' }}
+      </button>
+    </div>
+
+    <div *ngIf="showBadges" style="margin-top: 1rem;">
+      <app-user-badges></app-user-badges>
     </div>
   </div>
-
-  <p *ngIf="user?.carbonGoal">Progress: {{ getGoalProgress() | number: '1.0-0' }}%</p>
-
-  <h3>Update Carbon Goal</h3>
-  <input type="number" [(ngModel)]="goalInput" placeholder="Set your goal" />
-  <button (click)="updateGoal()">Save Goal</button>
-
-  <p *ngIf="msg" style="color: green">{{ msg }}</p>
-  
-  
-</div>
 </div>

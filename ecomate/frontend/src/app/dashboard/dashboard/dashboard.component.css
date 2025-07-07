@@ -107,3 +107,25 @@ button:hover {
   font-weight: 500;
   margin-bottom: 1rem;
 }
+/* Footprint + Reset Flex Row */
+.footprint-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.reset-btn-inline {
+  background-color: #588157;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.reset-btn-inline:hover {
+  background-color: #96b495;
+}

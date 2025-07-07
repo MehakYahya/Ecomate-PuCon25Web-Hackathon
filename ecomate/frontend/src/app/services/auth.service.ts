@@ -103,4 +103,7 @@ export class AuthService {
   getCommunityById(id: string) {
     return this.http.get<any>(`http://localhost:5000/api/communities/${id}`, this.authHeader());
   }
+  resetUserProgress() {
+  return this.http.post<any>(`http://localhost:5000/api/users/reset`, {}, this.authHeader());
+}
 }

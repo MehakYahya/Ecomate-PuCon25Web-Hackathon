@@ -1,0 +1,42 @@
+.badge-container {
+  padding: 1rem;
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 1rem;
+}
+
+.badge-card {
+  padding: 1rem;
+  border-radius: 10px;
+ background: rgba(212, 234, 208, 0.9);  
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 200px;
+}
+
+.badge-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.badge-info h4 {
+  margin: 0;
+}
+
+.badge-info p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.low     { border-left: 4px solid #91c788; }
+.medium  { border-left: 4px solid #f4a261; }
+.high    { border-left: 4px solid #a07f77; }
+.neutral { border-left: 4px solid #8ecae6; }
+.varies  { border-left: 4px solid #adb5bd; }
+
+.error {
+  color: red;
+  margin-top: 1rem;
+}
