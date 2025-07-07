@@ -50,7 +50,7 @@ togglePassword() {
         this.error = '';
         this.redirecting = true;  // Show animation
 
-      setTimeout(() => window.location.href = '/login', 1000);
+        setTimeout(() => this.router.navigate(['/login']), 1000);
       },
       error: (err) => {
         this.error = err.error.message || 'Registration failed';
@@ -77,7 +77,7 @@ togglePassword() {
           next: (res: any) => {
             localStorage.setItem('auth_token', res.token);
             localStorage.setItem('user', JSON.stringify(res.user));
-            window.location.href = '/login';
+this.router.navigate(['/login']);
           },
           error: (err: any) => {
             this.error = err.error?.message || 'Google login failed';

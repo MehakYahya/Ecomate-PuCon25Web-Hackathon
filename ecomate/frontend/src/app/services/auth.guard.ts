@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, CanLoad, Route, UrlSegment, Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { Auth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
-
+export class AuthGuard implements CanActivate, CanLoad {
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -15,6 +14,14 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   async canActivate(): Promise<boolean> {
+    return this.checkAccess();
+  }
+
+  async canLoad(route: Route, segments: UrlSegment[]): Promise<boolean> {
+    return this.checkAccess();
+  }
+
+  private async checkAccess(): Promise<boolean> {
     const backendLoggedIn = this.auth.isLoggedIn();
 
     const firebaseUser = this.firebaseAuth.currentUser || await new Promise((resolve) => {

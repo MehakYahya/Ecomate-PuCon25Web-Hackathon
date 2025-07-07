@@ -40,7 +40,7 @@ export class LoginComponent {
         localStorage.setItem('user', JSON.stringify(res.user));
         localStorage.setItem('auth_token', res.token); // ✅ important for header
 
-        setTimeout(() => window.location.href = '/dashboard', 1000);
+setTimeout(() => this.router.navigate(['/dashboard']), 1000);
       },
       error: (err: any) => {
         this.error = err.error?.message || 'Login failed';
@@ -63,7 +63,7 @@ export class LoginComponent {
           next: (res: any) => {
             localStorage.setItem('auth_token', res.token);
             localStorage.setItem('user', JSON.stringify(res.user));
-            window.location.href = '/dashboard';
+            this.router.navigate(['/dashboard']);
           },
           error: (err: any) => {
             this.error = err.error?.message || 'Google login failed';

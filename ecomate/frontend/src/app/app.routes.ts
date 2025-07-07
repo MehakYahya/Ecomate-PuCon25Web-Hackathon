@@ -4,7 +4,7 @@ import { AuthGuard } from './services/auth.guard';
 export const routes: Routes = [
   { path: 'register', loadComponent: () => import('./auth/register/register.component').then(m => m.RegisterComponent) },
   { path: 'login', loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent) },
-  { path: 'dashboard', loadComponent: () => import('./dashboard/dashboard/dashboard.component').then(m => m.DashboardComponent), canActivate: [AuthGuard] },
+  { path: 'dashboard', loadComponent: () => import('./dashboard/dashboard/dashboard.component').then(m => m.DashboardComponent), canActivate: [AuthGuard],canLoad: [AuthGuard] },
   { path: 'log-activity', loadComponent: () => import('./log-activity/log-activity.component').then(m => m.LogActivityComponent) },
   { path: 'activity-history', loadComponent: () => import('./activity-history/activity-history.component').then(m => m.ActivityHistoryComponent) },
  {
