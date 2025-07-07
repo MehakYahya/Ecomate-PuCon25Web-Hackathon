@@ -65,12 +65,16 @@ EcoMate should provide a comprehensive suite of functionalities enabling users t
 git clone https://github.com/MehakYahya/Ecomate-PuCon25Web-Hackathon.git
 # Backend Setup
 cd Ecomate-PuCon25Web-Hackathon/ecomate/backend
+
 npm install
+
 node server.js
 
 # Frontend Setup
 cd Ecomate-PuCon25Web-Hackathon/ecomate/frontend
+
 npm install
+
 ng serve
 
 ## 🚀 Demo & Screenshots
