@@ -11,6 +11,9 @@ app.use(express.json());
 const path = require('path');
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 const postRoutes = require('./routes/posts');
+//badges
+const badgeRoutes = require('./routes/badgeRoutes');
+app.use('/api/badges', badgeRoutes);
 
 
 // Routes
