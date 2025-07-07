@@ -16,6 +16,10 @@ router.post('/', auth, async (req, res) => {
     });
 
     await activity.save();
+        const checkAndAwardBadges = require('../utils/badgeEvaluator');
+    const awardedBadges = await checkAndAwardBadges(req.user.id);
+    console.log('🎖️ Badges awarded:', awardedBadges);
+
     res.status(201).json({ message: 'Activity logged successfully' });
   } catch (error) {
     console.error('Activity log error:', error);

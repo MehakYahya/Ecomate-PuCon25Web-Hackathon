@@ -7,6 +7,7 @@ const auth = require('../middleware/authMiddleware');
 const generateToken = require('../utils/generateToken');
 const Activity = require('../models/Activity'); // Moved to top
 
+const UserBadge = require('../models/UserBadge');
 
 const admin = require('../firebaseAdmin');
 router.post('/google-login', async (req, res) => {
@@ -50,8 +51,6 @@ router.post('/google-login', async (req, res) => {
 });
 
 
-
-
 // Register
 router.post('/register', async (req, res) => {
   let { name, email, password } = req.body;
@@ -80,7 +79,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Login ✅ FIXED: added id
+// Login 
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -142,7 +141,28 @@ const activities = await Activity.find({ user: req.user.id });
     res.status(500).json({ message: "Server error" });
   }
 });
+//reset current footprint 
+router.post('/reset', auth, async (req, res) => {
+  try {
+    const userId = req.user.id;
 
+    // 1. Reset goal
+    const user = await User.findById(userId);
+    user.carbonGoal = 0;
+    await user.save();
+
+    // 2. Delete activities
+    await Activity.deleteMany({ user: userId });
+
+    // 3. Delete badges
+    await UserBadge.deleteMany({ user: userId });
+
+    res.json({ message: 'Progress reset successfully!' });
+  } catch (err) {
+    console.error('Reset error:', err);
+    res.status(500).json({ message: 'Failed to reset progress' });
+  }
+});
 // Update carbon goal
 router.put('/goal', auth, async (req, res) => {
   const { carbonGoal } = req.body;
