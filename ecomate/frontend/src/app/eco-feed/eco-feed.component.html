@@ -10,7 +10,26 @@
     <form *ngIf="showForm" (ngSubmit)="submitPost()" #postForm="ngForm">
       <div class="form-group">
         <label for="content">Content</label>
-        <textarea id="content" name="content" [(ngModel)]="content" required placeholder="Share a tip, article, or event..."></textarea>
+        <div class="voice-input-container">
+          <textarea id="content" name="content" [(ngModel)]="content" required placeholder="Share a tip, article, or event... (You can also use voice input in Urdu)"></textarea>
+          <button 
+            type="button" 
+            class="voice-btn" 
+            (click)="toggleVoiceRecording()"
+            [class.recording]="isRecording"
+            [disabled]="!voiceSupported"
+            [title]="voiceSupported ? (isRecording ? 'Stop recording' : 'Start voice input (Urdu)') : 'Voice input not supported'"
+          >
+            <span *ngIf="!isRecording">🎤</span>
+            <span *ngIf="isRecording" class="recording-pulse">🔴</span>
+          </button>
+        </div>
+        <small *ngIf="voiceSupported" class="voice-hint">
+          {{ isRecording ? '🎙️ Recording... Speak in Urdu' : 'Click the microphone to start Urdu voice input' }}
+        </small>
+        <small *ngIf="!voiceSupported" class="voice-warning">
+          ⚠️ Voice recognition not supported in this browser. Use Chrome, Edge, or Safari.
+        </small>
       </div>
 
       <div class="form-group">

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { VoiceRecognitionService } from '../services/voice-recognition.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-eco-feed',
@@ -10,7 +12,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   templateUrl: './eco-feed.component.html',
   styleUrls: ['./eco-feed.component.css'],
 })
-export class EcoFeedComponent implements OnInit {
+export class EcoFeedComponent implements OnInit, OnDestroy {
   content = '';
   type: 'tip' | 'article' | 'event' = 'tip';
   selectedFile: File | null = null;
@@ -21,13 +23,87 @@ export class EcoFeedComponent implements OnInit {
   user: any = null;
   token: string | null = null;
 
-  constructor(private http: HttpClient) {}
+  // Voice recognition properties
+  isRecording = false;
+  voiceSupported = false;
+  private voiceSubscription?: Subscription;
+  private statusSubscription?: Subscription;
+  private errorSubscription?: Subscription;
+
+  constructor(
+    private http: HttpClient,
+    private voiceService: VoiceRecognitionService
+  ) {}
 
   ngOnInit() {
     const userJson = localStorage.getItem('user');
     this.user = userJson ? JSON.parse(userJson) : null;
-this.token = localStorage.getItem('auth_token');
+    this.token = localStorage.getItem('auth_token');
     this.loadPosts();
+    this.initializeVoiceRecognition();
+  }
+
+  ngOnDestroy() {
+    // Clean up subscriptions
+    if (this.voiceSubscription) {
+      this.voiceSubscription.unsubscribe();
+    }
+    if (this.statusSubscription) {
+      this.statusSubscription.unsubscribe();
+    }
+    if (this.errorSubscription) {
+      this.errorSubscription.unsubscribe();
+    }
+    // Stop recording if active
+    if (this.isRecording) {
+      this.voiceService.stop();
+    }
+  }
+
+  initializeVoiceRecognition() {
+    // Check if voice recognition is supported
+    this.voiceSupported = this.voiceService.isSupported();
+
+    if (!this.voiceSupported) {
+      console.warn('Voice recognition not supported in this browser');
+      return;
+    }
+
+    // Subscribe to recognized text
+    this.voiceSubscription = this.voiceService.getText().subscribe({
+      next: (text) => {
+        // Append recognized text to content
+        this.content = this.content + ' ' + text;
+      },
+      error: (err) => console.error('Voice recognition error:', err)
+    });
+
+    // Subscribe to recording status
+    this.statusSubscription = this.voiceService.getStatus().subscribe({
+      next: (status) => {
+        this.isRecording = status;
+      }
+    });
+
+    // Subscribe to errors
+    this.errorSubscription = this.voiceService.getErrors().subscribe({
+      next: (error) => {
+        alert(`Voice recognition error: ${error}`);
+      }
+    });
+  }
+
+  toggleVoiceRecording() {
+    if (!this.voiceSupported) {
+      alert('Voice recognition is not supported in your browser. Please use Chrome, Edge, or Safari.');
+      return;
+    }
+
+    if (this.isRecording) {
+      this.voiceService.stop();
+    } else {
+      this.voiceService.start();
+    }
   }
 
   toggleForm() {
