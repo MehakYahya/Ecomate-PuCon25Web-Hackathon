@@ -11,6 +11,17 @@ The core challenge is to develop "EcoMate," a web application that allows users 
 1.  Individuals: Environmentally conscious citizens, students, members of local clubs or organizations seeking to reduce their personal and household carbon footprint. 
 2. Community Leaders/Organizers: Individuals who wish to initiate and manage sustainability efforts within their neighborhoods, workplaces, educational institutions, or social groups. 
 
+## ✨ Key Features
+
+### 🎤 Real-Time Voice Input (Urdu to English)
+- **Speak in Urdu** and see your words transcribed to English text in real-time
+- Perfect for creating posts in the Eco Feed without typing
+- Uses Web Speech API for accurate transcription
+- Visual feedback with recording indicator
+- Works on Chrome, Edge, and Safari
+
+See [VOICE_FEATURE.md](VOICE_FEATURE.md) for detailed usage instructions.
+
 ## 🛠️ Tech Stack
 
 ### 🔹 Frontend (Angular)
@@ -18,6 +29,7 @@ The core challenge is to develop "EcoMate," a web application that allows users 
 - Angular 17 (standalone components)
 - Angular Routing
 - Firebase for google auth Signin
+- **Web Speech API for Urdu to English voice transcription**
 
 ### 🔹 Backend (Node.js + Express)
 
